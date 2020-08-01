@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<h1 th:if="${message != null}"
+    th:text="${message}"></h1>
+<form th:action="@{/api/cars}" method="post" th:object="${car}" enctype="multipart/form-data">
+    <input type="file" name="file" id="file" />
+    <input type="submit" name="submit" value="Submit" />
+</form>
+</body>
+</html>
