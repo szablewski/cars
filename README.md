@@ -1,4 +1,4 @@
-# Cars appi
+# Cars
 REST API, which will accept a file of the given format - *.csv
 and save to the database.
 Only lines that have a specific color should be saved in the database.
