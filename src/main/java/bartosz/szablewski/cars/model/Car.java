@@ -3,7 +3,6 @@ package bartosz.szablewski.cars.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 @Entity
@@ -14,7 +13,6 @@ public class Car {
     private long id;
     private String name;
     private Date purchaseDate;
-    @NotBlank(message = "")
     private String color;
 
     public Car() {
