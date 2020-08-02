@@ -18,7 +18,7 @@ public class Car {
     public Car() {
     }
 
-    public Car(long id, String name, Date purchaseDate, @NotBlank(message = "") String color) {
+    public Car(long id, String name, Date purchaseDate, String color) {
         this.id = id;
         this.name = name;
         this.purchaseDate = purchaseDate;
