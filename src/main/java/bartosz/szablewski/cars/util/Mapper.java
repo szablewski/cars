@@ -15,12 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Mapper {
-
-
-    public static String TYPE = "text/csv";
-    static String[] HEADERs = {"Id", "Nazwa", "Data zakupu", "Kolor"};
-    private static Object Date;
-
     public static List<Car> carsMapper(InputStream is) {
         try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
              CSVParser csvParser = new CSVParser(fileReader,
@@ -31,14 +25,15 @@ public class Mapper {
             Iterable<CSVRecord> csvRecords = csvParser.getRecords();
 
             for (CSVRecord csvRecord : csvRecords) {
+                Object date;
                 Car car = new Car(
                         Long.parseLong(csvRecord.get("Id")),
                         csvRecord.get("Nazwa"),
-                        (java.util.Date) (Date = new SimpleDateFormat("dd.MM.yyyy").parse(csvRecord.get("Data zakupu"))),
+                        (java.util.Date) (date = new SimpleDateFormat("dd.MM.yyyy").parse(csvRecord.get("Data zakupu"))),
                         csvRecord.get("Kolor")
                 );
-
-                cars.add(car);
+                if (!car.getColor().equals(""))
+                    cars.add(car);
             }
 
             return cars;
