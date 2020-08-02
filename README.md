@@ -14,7 +14,7 @@ The color is given as a parameter of the HTTP request used to upload the file.
 
 ```
 $ cd .../cars
-$ mvn spring-boot:run
+$ mvn spring-boot:install
 ```
 Go to http://localhost:8080/api/cars
 Upload csv file.
