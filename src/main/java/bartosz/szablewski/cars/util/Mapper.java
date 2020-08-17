@@ -9,12 +9,17 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Mapper {
+    private static final String ID = "Id";
+    private static final String NAZWA = "Nazwa";
+    private static final String DATA_ZAKUPU = "Data zakupu";
+    private static final String KOLOR = "Kolor";
+
     public static List<Car> carsMapper(InputStream is) {
         try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
              CSVParser csvParser = new CSVParser(fileReader,
@@ -25,19 +30,18 @@ public class Mapper {
             Iterable<CSVRecord> csvRecords = csvParser.getRecords();
 
             for (CSVRecord csvRecord : csvRecords) {
-                Object date;
                 Car car = new Car(
-                        Long.parseLong(csvRecord.get("Id")),
-                        csvRecord.get("Nazwa"),
-                        (java.util.Date) (date = new SimpleDateFormat("dd.MM.yyyy").parse(csvRecord.get("Data zakupu"))),
-                        csvRecord.get("Kolor")
+                        Long.parseLong(csvRecord.get(ID)),
+                        csvRecord.get(NAZWA),
+                        Date.from(Instant.parse(csvRecord.get(DATA_ZAKUPU))),
+                        csvRecord.get(KOLOR)
                 );
                 if (!car.getColor().equals(""))
                     cars.add(car);
             }
 
             return cars;
-        } catch (IOException | ParseException e) {
+        } catch (IOException e) {
             throw new RuntimeException("Fail to parse CSV file: " + e.getMessage());
         }
     }
