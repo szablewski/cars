@@ -19,11 +19,7 @@ public class CarService {
     }
 
     public boolean hasCSVFormat(MultipartFile file) {
-        if (!TYPE.equals(file.getContentType())) {
-            return false;
-        }
-
-        return true;
+        return TYPE.equals(file.getContentType());
     }
 
     public List<Car> save(MultipartFile file) {
